@@ -6,6 +6,7 @@ import haxe.Template;
 import lime.tools.helpers.AssetHelper;
 import lime.tools.helpers.DeploymentHelper;
 import lime.tools.helpers.FileHelper;
+import lime.tools.helpers.IconHelper;
 import lime.tools.helpers.HTML5Helper;
 import lime.tools.helpers.LogHelper;
 import lime.tools.helpers.PathHelper;
@@ -184,6 +185,13 @@ class HTML5Platform extends PlatformTarget {
 		context.WIN_FLASHBACKGROUND = StringTools.hex (project.window.background, 6);
 		context.OUTPUT_DIR = targetDirectory;
 		context.OUTPUT_FILE = outputFile;
+		
+		if ((project.icons.length > 0) && IconHelper.createIcon (project.icons, 256, 256, PathHelper.combine (targetDirectory + "/bin/", "icon.png"))) {
+			
+			context.HAS_ICON = true;
+			context.ICON_NAME = "icon.png";
+			
+		}
 		
 		if (project.targetFlags.exists ("webgl")) {
 			
